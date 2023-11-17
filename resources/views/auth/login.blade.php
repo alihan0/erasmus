@@ -23,6 +23,8 @@
         <!-- App Css-->
         <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
+        <link rel="stylesheet" type="text/css" href="assets/libs/toastr/build/toastr.min.css">
+
     </head>
 
     <body class="auth-body-bg">
@@ -80,27 +82,17 @@
                                                     <label for="username" class="form-label">E-posta</label>
                                                     <input type="text" class="form-control" id="username" placeholder="E-posta adresini gir">
                                                 </div>
-                        
                                                 <div class="mb-3">
-                                                    
                                                     <label class="form-label">Şifre</label>
                                                     <div class="input-group auth-pass-inputgroup">
-                                                        <input type="password" class="form-control" placeholder="Şireni gir" aria-label="Password" aria-describedby="password-addon">
+                                                        <input type="password" class="form-control" placeholder="Şireni gir" aria-label="Password" aria-describedby="password-addon" id="password">
                                                         <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                     </div>
                                                 </div>
-                        
-                                                
-                                                
                                                 <div class="mt-3 d-grid">
-                                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Oturum Aç</button>
+                                                    <button class="btn btn-primary waves-effect waves-light" type="submit" onclick="login()">Oturum Aç</button>
                                                 </div>
-                    
-                                                
-                                                
-
-                                            </form>
-                                            
+                                            </form> 
                                         </div>
                                     </div>
 
@@ -127,6 +119,9 @@
         <script src="/assets/libs/simplebar/simplebar.min.js"></script>
         <script src="/assets/libs/node-waves/waves.min.js"></script>
 
+        <script src="assets/libs/toastr/build/toastr.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
         <!-- owl.carousel js -->
         <script src="/assets/libs/owl.carousel/owl.carousel.min.js"></script>
 
@@ -135,6 +130,22 @@
         
         <!-- App js -->
         <script src="/assets/js/app.js"></script>
+
+        <script>
+            function login(){
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                axios.post('/auth/login', {email:email, password:password}).then((res) => {
+                    toastr[res.data.type](res.data.message);
+                    if(res.data.status){
+                        setInterval(() => {
+                            window.location.assign('/');
+                        }, 500);
+                    }
+                });
+            }
+        </script>
 
     </body>
 </html>
