@@ -4,7 +4,7 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Login 2 | Skote - Admin & Dashboard Template</title>
+        <title>Oturum Aç - {{$system->site_name}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -23,7 +23,7 @@
         <!-- App Css-->
         <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-        <link rel="stylesheet" type="text/css" href="assets/libs/toastr/build/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/libs/toastr/build/toastr.min.css">
 
     </head>
 
@@ -79,8 +79,8 @@
                                             <form action="javascript:;">
                 
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">E-posta</label>
-                                                    <input type="text" class="form-control" id="username" placeholder="E-posta adresini gir">
+                                                    <label for="email" class="form-label">E-posta</label>
+                                                    <input type="text" class="form-control" id="email" placeholder="E-posta adresini gir">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Şifre</label>
@@ -119,7 +119,7 @@
         <script src="/assets/libs/simplebar/simplebar.min.js"></script>
         <script src="/assets/libs/node-waves/waves.min.js"></script>
 
-        <script src="assets/libs/toastr/build/toastr.min.js"></script>
+        <script src="/assets/libs/toastr/build/toastr.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
         <!-- owl.carousel js -->
