@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->integer('gender')->nullable();
-            $table->string('bloog_group')->nullable();
+            $table->string('blood_group')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('image')->nullable();
             $table->string('company')->nullable();
