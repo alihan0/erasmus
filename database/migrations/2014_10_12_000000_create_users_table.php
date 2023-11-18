@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('bloog_group')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('image')->nullable();
+            $table->string('company')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('district')->nullable();
+            $table->string('address')->nullable();
             $table->integer('role');
             $table->integer('status');
             $table->rememberToken();

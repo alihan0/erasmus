@@ -30,8 +30,8 @@
             </a>
             <ul class="sub-menu" aria-expanded="true">
                 <li>
-                    <a href="javascript: void(0);"  key="t-vertical">Tüm Kullanıcılar</a>
-                    <a href="javascript: void(0);"  key="t-vertical">Yeni Kullanıcı</a>
+                    <a href="/user"  key="t-vertical">Tüm Kullanıcılar</a>
+                    <a href="/user/new"  key="t-vertical">Yeni Kullanıcı</a>
                 </li>
             </ul>
         </li>
