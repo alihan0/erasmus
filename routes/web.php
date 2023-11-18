@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(MainController::class)->middleware('auth')->group(function(){
     Route::get('/', 'index');
+});
+
+Route::controller(StaffController::class)->middleware('auth')->prefix('staff')->group(function(){
+    Route::get('/', 'all');
+    Route::get('/new', 'new');
+    Route::post('/create', 'create');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

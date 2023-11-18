@@ -64,6 +64,19 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="fas fa-user-circle"></i>
+                <span key="t-layouts">Personel</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li>
+                    <a href="/staff"  key="t-vertical">Tüm Personeller</a>
+                    <a href="/staff/new"  key="t-vertical">Yeni Personel</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="fas fa-cash-register"></i>
                 <span key="t-layouts">Muhasebe</span>
             </a>
