@@ -101,4 +101,18 @@ class UserController extends Controller
             return response()->json(["type" => "error", "message" => "Kullanıcı silinemedi"]);
         }
     }
+
+    public function detail($id){
+        return view('user.detail', ['user' => User::find($id)]);
+    }
+
+    public function save_logo(Request $request){
+        $user = User::find($request->id);
+        $user->image = $request->logo;
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Logo kaydedildi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Logo kaydedilemedi"]);
+        }
+    }
 }

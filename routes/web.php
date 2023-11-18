@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(MainController::class)->middleware('auth')->group(function(){
     Route::get('/', 'index');
+    Route::post('/upload', 'upload');
 });
 
 Route::controller(StaffController::class)->middleware('auth')->prefix('staff')->group(function(){
@@ -40,7 +41,7 @@ Route::controller(UserController::class)->middleware('auth')->prefix('user')->gr
     Route::post('/update', 'update');
     Route::post('/remove', 'remove');
     Route::post('/change-password', 'change_password');
-
+    Route::post('/save-logo', 'save_logo');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

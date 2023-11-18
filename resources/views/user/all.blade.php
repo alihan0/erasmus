@@ -50,7 +50,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="/user/detail/{{$user->id}}" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-toggle="tooltip" title="Detaylar"><i class="fas fa-eye"></i></a>
+                                    <a href="/user/detail/{{$user->id}}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Detaylar"><i class="fas fa-eye"></i></a>
                                     <a href="javascript:;" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changePasswordModal{{$user->id}}" data-bs-toggle="tooltip" title="Şifre Değiştir"><i class="fas fa-key"></i></a>
                                     <a href="/user/edit/{{$user->id}}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Düzenle"><i class="fas fa-edit"></i></a>
                                     <a href="javascript:;" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Sil" onclick="removeStaff({{$user->id}})"><i class="fas fa-trash"></i></a>
