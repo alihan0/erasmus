@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Allergy;
 use App\Models\Disease;
 use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
@@ -74,6 +75,22 @@ class DatabaseSeeder extends Seeder
             "intructions" => "Lorem ipsum dolor sit a ment.",
             "drugs" => "ilaç3, ilaç4",
             "is_fatal" => 1
+        ]);
+
+        Allergy::create([
+            "user" => 2,
+            "allergy" => "Alerji 1",
+            "instructions" => "Lorem ipsum dolor sit a ment.",
+            "drugs" => "ilaç10, ilaç11",
+            "is_fatal" => 1
+        ]);
+
+        Allergy::create([
+            "user" => 2,
+            "allergy" => "Alerji 2",
+            "instructions" => "Lorem ipsum dolor sit a ment.",
+            "drugs" => "ilaç12, ilaç13",
+            "is_fatal" => 0
         ]);
 
         System::create([

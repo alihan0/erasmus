@@ -50,4 +50,7 @@ class User extends Authenticatable
     public function Diseases(){
         return $this->hasMany(Disease::class, 'user', 'id');
     }
+    public function Allergies(){
+        return $this->hasMany(Allergy::class, 'user', 'id');
+    }
 }

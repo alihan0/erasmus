@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allergy;
 use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
 use Illuminate\Http\Request;
@@ -193,6 +194,36 @@ class ParticipantController extends Controller
             return response()->json(["type" => "success", "message" => "Hastalık eklendi", 'status' => true]);
         }else{
             return response()->json(["type" => "error", "message" => "Hastalık eklenemedi"]);
+        }
+    }
+
+    public function add_allergy(Request $request){
+        if(!User::find($request->id)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı bulunamadı"]);
+        }
+
+        if(empty($request->allergy)){
+            return response()->json(["type" => "warning", "message" => "Bir alerji adı girmelisiniz"]);
+        }
+
+        if(empty($request->intructions)){
+            return response()->json(["type" => "warning", "message" => "Alerji talimatları girmelisiniz"]);
+        }
+
+        if(empty($request->drugs)){
+            return response()->json(["type" => "warning", "message" => "Alerji ilacı girmelisiniz"]);
+        }
+
+        $allergy = new Allergy;
+        $allergy->user = $request->id;
+        $allergy->allergy = $request->allergy;
+        $allergy->instructions = $request->intructions;
+        $allergy->drugs = $request->drugs;
+        $allergy->is_fatal = $request->is_fatal;
+        if($allergy->save()){
+            return response()->json(["type" => "success", "message" => "Alerji eklendi", 'status' => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Alerji eklenemedi"]);
         }
     }
 }

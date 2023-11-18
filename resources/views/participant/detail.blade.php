@@ -108,7 +108,7 @@
                         <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#diseaseModal" class="list-group-item list-group-item-action" aria-current="true">
                             Hastalık Ekle
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#alergyModal" class="list-group-item list-group-item-action" aria-current="true">
                             Alerji Ekle
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
@@ -366,6 +366,51 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="card-title">Alerji Bilgileri</h4>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Alerji Adı</th>
+                                    <th scope="col">Talimatlar</th>
+                                    <th scope="col">İlaçlar</th>
+                                    <th scope="col">Ölüm Riski</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->Allergies as $item)
+                                        <tr>
+                                            <td>
+                                                {{$item->id}}
+                                            </td>
+                                            <td>
+                                                {{$item->allergy}}
+                                            </td>
+                                            <td>
+                                                {{$item->intructions}}
+                                            </td>
+                                            <td>
+                                                {{$item->drugs}}
+                                            </td>
+                                            <td>
+                                                @if ($item->is_fatal == 1)
+                                                    <span class="badge bg-danger">VAR</span>
+                                                @else
+                                                    <span class="badge bg-primary">Yok</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="card-title">Belgeler</h4>
                             <table class="table">
                                 <thead>
@@ -515,6 +560,51 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="alergyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Alerji Ekle</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="mb-3">
+                    <label for="allergy" class="form-label">Alerji Adı</label>
+                    <input type="text" class="form-control" id="allergy">
+                </div>
+                <div class="mb-3">
+                    <label for="allergy_intructions" class="form-label">Talimatlar</label>
+                    <textarea class="form-control" id="allergy_intructions" rows="5"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="allergy_drugs" class="form-label">İlaçlar</label>
+                            <input type="text" class="form-control" id="allergy_drugs">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="allergy_is_fatal" class="form-label">Bu alerji ölümcül mü?</label>
+                            <select name="allergy_is_fatal" id="allergy_is_fatal" class="form-control">
+                                <option value="0">Hayır</option>
+                                <option value="1">Evet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button type="button" class="btn btn-primary" onclick="saveAllergy({{$user->id}})">Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @section('script')
@@ -578,6 +668,27 @@
 
         axios.post('/participant/add/disease', {
             'disease': disease,
+            'intructions': intructions,
+            'drugs': drugs,
+            'is_fatal': is_fatal,
+            'id': id
+        }).then((res) => {
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
+    }
+    function saveAllergy(id){
+        var allergy = $("#allergy").val();
+        var intructions = $("#allergy_intructions").val();
+        var drugs = $("#allergy_drugs").val();
+        var is_fatal = $("#allergy_is_fatal").val();
+
+        axios.post('/participant/add/allergy', {
+            'allergy': allergy,
             'intructions': intructions,
             'drugs': drugs,
             'is_fatal': is_fatal,
