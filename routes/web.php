@@ -57,6 +57,7 @@ Route::controller(ParticipantController::class)->middleware('auth')->prefix('par
     Route::post('/add/emergency-contact', 'add_emergency_contact');
     Route::post('/add/disease', 'add_disease');
     Route::post('/add/allergy', 'add_allergy');
+    Route::post('/add/drug', 'add_drug');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

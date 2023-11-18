@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Allergy;
 use App\Models\Disease;
+use App\Models\Drug;
 use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
 use App\Models\Proximity;
@@ -92,6 +93,19 @@ class DatabaseSeeder extends Seeder
             "drugs" => "ilaç12, ilaç13",
             "is_fatal" => 0
         ]);
+
+        Drug::create([
+            'user' => 2,
+            'drug' => 'Ilac 1',
+            'is_receipe' => 0
+        ]);
+
+        Drug::create([
+            'user' => 2,
+            'drug' => 'Ilac 2',
+            'is_receipe' => 1
+        ]);
+
 
         System::create([
             'site_name' => 'Erasmus',

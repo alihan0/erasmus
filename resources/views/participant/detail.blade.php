@@ -111,7 +111,7 @@
                         <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#alergyModal" class="list-group-item list-group-item-action" aria-current="true">
                             Alerji Ekle
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#drugsModal" class="list-group-item list-group-item-action" aria-current="true">
                             İlaç Ekle
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
@@ -411,6 +411,43 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="card-title">İlaç Bilgileri</h4>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">İlaç Adı</th>
+                                    <th scope="col">Reçete Gerekli mi?</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->Drugs as $item)
+                                        <tr>
+                                            <td>
+                                                {{$item->id}}
+                                            </td>
+                                            <td>
+                                                {{$item->drug}}
+                                            </td>
+                                            <td>
+                                                @if ($item->is_receipe == 1)
+                                                    <span class="badge bg-danger">EVET</span>
+                                                @else
+                                                    <span class="badge bg-primary">HAYIR</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="card-title">Belgeler</h4>
                             <table class="table">
                                 <thead>
@@ -550,8 +587,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
@@ -595,12 +630,43 @@
                         </div>
                     </div>
                 </div>
-                
-                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
               <button type="button" class="btn btn-primary" onclick="saveAllergy({{$user->id}})">Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="drugsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">İlaç Ekle</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="drug_name" class="form-label">İlaç Adı</label>
+                            <input type="text" class="form-control" id="drug_name">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="is_receipe" class="form-label">Reçetesiz temin edilebilir mi?</label>
+                            <select name="is_receipe" id="is_receipe" class="form-control">
+                                <option value="0">Evet</option>
+                                <option value="1">Hayır</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button type="button" class="btn btn-primary" onclick="saveDrug({{$user->id}})">Kaydet</button>
             </div>
           </div>
         </div>
@@ -692,6 +758,26 @@
             'intructions': intructions,
             'drugs': drugs,
             'is_fatal': is_fatal,
+            'id': id
+        }).then((res) => {
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
+    }
+
+    function saveDrug(id){
+        var drug_name = $("#drug_name").val();
+        var is_receipe = $("#is_receipe").val();
+        var drugs = $("#allergy_drugs").val();
+        var is_fatal = $("#allergy_is_fatal").val();
+
+        axios.post('/participant/add/drug', {
+            'drug_name': drug_name,
+            'is_receipe': is_receipe,
             'id': id
         }).then((res) => {
             toastr[res.data.type](res.data.message);

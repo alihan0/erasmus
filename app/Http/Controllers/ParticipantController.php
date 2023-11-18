@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Allergy;
+use App\Models\Drug;
 use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
 use Illuminate\Http\Request;
@@ -224,6 +225,26 @@ class ParticipantController extends Controller
             return response()->json(["type" => "success", "message" => "Alerji eklendi", 'status' => true]);
         }else{
             return response()->json(["type" => "error", "message" => "Alerji eklenemedi"]);
+        }
+    }
+
+    public function add_drug(Request $request){
+        if(!User::find($request->id)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı bulunamadı"]);
+        }
+
+        if(empty($request->drug_name)){
+            return response()->json(["type" => "warning", "message" => "Bir ilac adı girmelisiniz"]);
+        }
+
+        $drug = new Drug;
+        $drug->drug = $request->drug_name;
+        $drug->user = $request->id;
+        $drug->is_receipe = $request->is_receipe;
+        if($drug->save()){
+            return response()->json(["type" => "success", "message" => "Ilaç eklendi", 'status' => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Ilaç eklenemedi"]);
         }
     }
 }
