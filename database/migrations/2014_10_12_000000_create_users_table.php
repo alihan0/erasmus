@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('phone')->nullable();
             $table->integer('gender')->nullable();
             $table->string('blood_group')->nullable();
@@ -27,8 +27,12 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('district')->nullable();
             $table->string('address')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('weight')->nullable();
             $table->integer('role');
+            $table->integer('type')->nullable();
             $table->integer('status');
+            $table->integer('created_by')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,17 @@ Route::controller(UserController::class)->middleware('auth')->prefix('user')->gr
     Route::post('/remove', 'remove');
     Route::post('/change-password', 'change_password');
     Route::post('/save-logo', 'save_logo');
+});
+
+Route::controller(ParticipantController::class)->middleware('auth')->prefix('participant')->group(function(){
+    Route::get('/', 'all');
+    Route::get('/new', 'new');
+    Route::get('/edit/{id}', 'edit');
+    Route::get('/detail/{id}', 'detail');
+    Route::post('/create', 'create');
+    Route::post('/update', 'update');
+    Route::post('/remove', 'remove');
+    Route::post('/save-image', 'save_image');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

@@ -43,8 +43,8 @@
             </a>
             <ul class="sub-menu" aria-expanded="true">
                 <li>
-                    <a href="javascript: void(0);"  key="t-vertical">Tüm Katılımcılar</a>
-                    <a href="javascript: void(0);"  key="t-vertical">Yeni Katılımcı</a>
+                    <a href="/participant"  key="t-vertical">Tüm Katılımcılar</a>
+                    <a href="/participant/new"  key="t-vertical">Yeni Katılımcı</a>
                 </li>
             </ul>
         </li>

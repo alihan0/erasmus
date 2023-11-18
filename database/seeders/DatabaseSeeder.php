@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ParticipantType;
 use App\Models\User;
 use App\Models\System;
 use Illuminate\Database\Seeder;
@@ -43,6 +44,28 @@ class DatabaseSeeder extends Seeder
             'logo_primary' => '/assets/images/metatige/metatige-vlight.png',
             'logo_secondary' => '/assets/images/metatige/metatige-vlight.png',
             'status' => 1
+        ]);
+
+        ParticipantType::create([
+            "name" => "Öğrenci"
+        ]);
+        ParticipantType::create([
+            "name" => "Öğretmen"
+        ]);
+        ParticipantType::create([
+            "name" => "Gözetmen"
+        ]);
+        ParticipantType::create([
+            "name" => "Danışman"
+        ]);
+        ParticipantType::create([
+            "name" => "Personel"
+        ]);
+        ParticipantType::create([
+            "name" => "Uzman"
+        ]);
+        ParticipantType::create([
+            "name" => "Yetişkin"
         ]);
     }
 }
