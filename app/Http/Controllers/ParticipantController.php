@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Proximity;
 
 class ParticipantController extends Controller
 {
@@ -129,7 +131,7 @@ class ParticipantController extends Controller
     }
 
     public function detail($id){
-        return view('participant.detail', ['user' => User::find($id)]);
+        return view('participant.detail', ['user' => User::find($id), 'proximities' => Proximity::all()]);
     }
 
     public function save_image(Request $request){
@@ -139,6 +141,27 @@ class ParticipantController extends Controller
             return response()->json(["type" => "success", "message" => "Fotoğraf kaydedildi","status" => true]);
         }else{
             return response()->json(["type" => "error", "message" => "Fotoğraf kaydedilemedi"]);
+        }
+    }
+
+    public function add_emergency_contact(Request $request){
+        if(!User::find($request->id)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı bulunamadı"]);
+        }
+
+        if(empty($request->proximity) || empty($request->name) || empty($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Bilgileri eksiksiz doldurun"]);
+        }
+
+        $contact = new EmergencyContact;
+        $contact->user = $request->id;
+        $contact->name = $request->name;
+        $contact->phone = $request->phone;
+        $contact->proximity = $request->proximity;
+        if($contact->save()){
+            return response()->json(["type" => "success", "message" => "Acil durum kişisi eklendi", 'status' => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Acil durum kişisi eklenemedi"]);
         }
     }
 }

@@ -101,8 +101,27 @@
                         <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#UploadModal" class="list-group-item list-group-item-action" aria-current="true">
                             Fotoğraf Değiştir
                         </a>
+                        
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#emergencyContactModal" class="list-group-item list-group-item-action" aria-current="true">
+                            Acil Durum Kişisi Ekle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            Hastalık Ekle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            Alerji Ekle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            İlaç Ekle
+                        </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                             Belge yükle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            Pasaport Ekle
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            Vize Ekle
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                             Ödeme Ekle
@@ -111,7 +130,7 @@
                             Bakiye Ekle
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            Kullanıcıyı Sil
+                            Katılımcıyı Sil
                         </a>
                       </div>
                 </div>
@@ -125,46 +144,6 @@
                             <div class="d-flex">
                                 <div class="flex-grow-1">
                                     <p class="text-muted fw-medium">Toplam Proje</p>
-                                    <h4 class="mb-0">1,235</h4>
-                                </div>
-
-                                <div class="flex-shrink-0 align-self-center">
-                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
-                                        <span class="avatar-title">
-                                            <i class="bx bx-copy-alt font-size-24"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mini-stats-wid">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <div class="flex-grow-1">
-                                    <p class="text-muted fw-medium">Aktif Proje</p>
-                                    <h4 class="mb-0">1,235</h4>
-                                </div>
-
-                                <div class="flex-shrink-0 align-self-center">
-                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
-                                        <span class="avatar-title">
-                                            <i class="bx bx-copy-alt font-size-24"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mini-stats-wid">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <div class="flex-grow-1">
-                                    <p class="text-muted fw-medium">Katılımcı</p>
                                     <h4 class="mb-0">1,235</h4>
                                 </div>
 
@@ -239,6 +218,46 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <p class="text-muted fw-medium">Hastalık</p>
+                                    <h4 class="mb-0">1,235</h4>
+                                </div>
+
+                                <div class="flex-shrink-0 align-self-center">
+                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                                        <span class="avatar-title">
+                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <p class="text-muted fw-medium">Alerji</p>
+                                    <h4 class="mb-0">1,235</h4>
+                                </div>
+
+                                <div class="flex-shrink-0 align-self-center">
+                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
+                                        <span class="avatar-title">
+                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -265,17 +284,35 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Ödeme Kayıtları</h4>
+                            <h4 class="card-title">Acil Durum Kişileri</h4>
+                            
                             <table class="table">
                                 <thead>
                                   <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tutar</th>
-                                    <th scope="col">Tarih</th>
-                                    <th scope="col">Durum</th>
+                                    <th scope="col">İsim</th>
+                                    <th scope="col">Yakınlık</th>
+                                    <th scope="col">Telefon</th>
                                   </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @foreach ($user->EmergencyContact as $item)
+                                        <tr>
+                                            <td>
+                                                {{$item->id}}
+                                            </td>
+                                            <td>
+                                                {{$item->name}}
+                                            </td>
+                                            <td>
+                                                {{$item->Proximity->name}}
+                                            </td>
+                                            <td>
+                                                {{$item->phone}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                               </table>
                         </div>
                     </div>
@@ -347,6 +384,48 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="emergencyContactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Acil Durum Kişisi Ekle</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="emergency_proximity" class="form-label">Yakınlık Derecesi</label>
+                    <select name="proximity" id="emergency_proximity" class="form-control">
+                        <option value="0"> Seçin...</option>
+                        @foreach ($proximities as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="emergency_name" class="form-label">İsim</label>
+                            <input type="text" class="form-control" id="emergency_name">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="emergency_phone" class="form-label">Telefon</label>
+                            <input type="text" class="form-control" id="emergency_phone">
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button type="button" class="btn btn-primary" onclick="saveEmergencyContact({{$user->id}})">Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @section('script')
@@ -380,6 +459,26 @@
                 }, 500);
                } 
             });
+    }
+
+    function saveEmergencyContact(id){
+        var proximity = $("#emergency_proximity").val();
+        var name = $("#emergency_name").val();
+        var phone = $("#emergency_phone").val();
+
+        axios.post('/participant/add/emergency-contact', {
+            'proximity': proximity,
+            'name': name,
+            'phone': phone,
+            'id': id
+        }).then((res) => {
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
     }
     </script>
 @endsection
