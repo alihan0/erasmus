@@ -48,4 +48,35 @@ class UserController extends Controller
             return response()->json(["type" => "error", "message" => "Kullanıcı eklenemedi"]);
         }
     }
+
+    public function edit($id){
+        return view('user.edit', ['user' => User::find($id)]);
+    }
+
+    public function update(Request $request){
+        if(empty($request->name) || empty($request->email) || empty($request->phone) || empty($request->company) || empty($request->city) || empty($request->district) || empty($request->country) || empty($request->address)){
+            return response()->json(["type" => "warning", "message" => "Tüm alanları doldurun!"]);
+        }
+
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(["type" => "warning", "message" => "Geçerli bir e-posta adresi girin!"]);
+        }
+
+
+
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->company = $request->company;
+        $user->country = $request->country;
+        $user->city = $request->city;
+        $user->district = $request->district;
+        $user->address = $request->address;
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Kullanıcı güncellendi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Kullanıcı güncellenemedi"]);
+        }
+    }
 }
