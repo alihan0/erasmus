@@ -67,4 +67,17 @@ class StaffController extends Controller
             return response()->json(["type" => "error", "message" => "Personel güncellenemedi"]);
         }
     }
+
+    public function change_password(Request $request){
+        if(empty($request->password)){
+            return response()->json(["type" => "warning", "message" => "Tüm alanları doldurun!"]);
+        }
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Sifre değiştirildi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Sifre değiştirilemedi"]);
+        }
+    }
 }

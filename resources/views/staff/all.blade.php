@@ -42,10 +42,32 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <a href="javascript:;" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changePasswordModal{{$staff->id}}" data-bs-toggle="tooltip" title="Şifre Değiştir"><i class="fas fa-key"></i></a>
                                     <a href="/staff/edit/{{$staff->id}}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Düzenle"><i class="fas fa-edit"></i></a>
                                     <a href="javascript:;" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Sil" onclick="removeStaff({{$staff->id}})"><i class="fas fa-trash"></i></a>
                                 </td>
                               </tr>
+
+                              <div class="modal fade" id="changePasswordModal{{$staff->id}}" tabindex="-1" >
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="">Şifre Değiştir</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="newPassword" class="form-label">Yeni Şifre</label>
+                                            <input type="text" class="form-control" id="newPassword{{$staff->id}}"  name="newPassword">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                      <button type="button" class="btn btn-primary" onclick="changePassword({{$staff->id}})">Şifre Değiştir</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                           @endforeach
                         </tbody>
                       </table>
@@ -53,4 +75,21 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function changePassword(id){
+            var password = $('#newPassword'+id).val();
+            axios.post('/staff/change-password', {'password': password, 'id': id})
+                .then(res => {
+                    toastr[res.data.type](res.data.message);
+                   if(res.data.status){
+                    setInterval(() => {
+                        window.location.assign('/staff');
+                    }, 500);
+                   } 
+                });
+        }
+    </script>
 @endsection
