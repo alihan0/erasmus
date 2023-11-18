@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Kullanıcı Detayları')
+@section('title', 'Katılımcı Detayları')
     
 @section('content')
     <div class="row">

@@ -76,4 +76,55 @@ class ParticipantController extends Controller
             return response()->json(["type" => "error", "message" => "Katılımcı silinemedi"]);
         }
     }
+
+    public function edit($id){
+        return view('participant.edit', ['participant' => User::find($id), "types" => ParticipantType::all()]);
+    }
+
+    public function update(Request $request){
+        if(empty($request->type)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı türünü seçin!"]);
+        }
+
+        if(empty($request->name)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı adını girin!"]);
+        }
+
+        if(empty($request->email)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı e-posta adresini girin!"]);
+        }
+
+        if(empty($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı telefon numarasını girin!"]);
+        }
+
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(["type" => "warning", "message" => "Gecersiz e-posta adresi!"]);
+        }
+
+        if(!is_numeric($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Gecersiz telefon numarası!"]);
+        }
+
+
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->type = $request->type;
+        $user->gender = $request->gender;
+        $user->birthdate = $request->birthdate;
+        $user->blood_group = $request->blood_group;
+        $user->country = $request->country;
+        $user->city = $request->city;
+        $user->district = $request->district;
+        $user->address = $request->address;
+        $user->height = $request->height;
+        $user->weight = $request->weight;
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Katılımcı güncellendi","status" => true, 'id' => $user->id]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Katılımcı güncellendi"]);
+        }
+    }
 }

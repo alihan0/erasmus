@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Personeller')
+@section('title', 'Katılımcı Ekle')
     
 @section('content')
     <div class="row">
@@ -15,7 +15,7 @@
                             <select name="type" id="type" class="form-control">
                                 <option value="0">Seçin...</option>
                                 @foreach ($types as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option  value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
