@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             @if ($user->image == null)
-                                <a href="javascript:;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#logoUploadModal"><i class="fas fa-camera"></i> Logo Yükle</a>
+                                <a href="javascript:;" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UploadModal"><i class="fas fa-camera"></i> Fotoğraf Yükle</a>
                             @endif
                             <img src="{{$user->image}}" alt="" width="100%">
                         </div>
@@ -20,10 +20,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span class="fw-bold">Firma/Kurum Adı:</span>
-                            <span>{{$user->company}}</span>
-                        </li>
+                
                         <li class="list-group-item d-flex justify-content-between">
                             <span class="fw-bold">İsim:</span>
                             <span>{{$user->name}}</span>
@@ -45,6 +42,50 @@
                             <span>{{$user->address}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
+                            <span class="fw-bold">Cinsiyet:</span>
+                            <span>
+                            @if ($user->gender == 1)
+                                Erkek
+                            @elseif($user->gender == 2)
+                                Kadın
+                            @else
+                                -
+                            @endif
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="fw-bold">Doğum Tarihi:</span>
+                            <span>{{$user->birthdate}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="fw-bold">Kan Grubu:</span>
+                            <span>
+                                @if ($user->blood_group == 1)
+                                    A RH +
+                                @elseif($user->blood_group == 2)
+                                    A RH -
+                                @elseif($user->blood_group == 3)
+                                    B RH +
+                                @elseif($user->blood_group == 4)
+                                    B RH -
+                                @elseif($user->blood_group == 5)
+                                    AB RH +
+                                @elseif($user->blood_group == 6)
+                                    AB RH -
+                                @elseif($user->blood_group == 7)
+                                    0 RH +
+                                @elseif($user->blood_group == 8)
+                                    0 RH -
+                                @else
+                                    -
+                                @endif
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="fw-bold">Boy/Kilo:</span>
+                            <span>{{$user->height.'cm / '.$user->weight.'kg'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
                             <span class="fw-bold">Durum:</span>
                             <span>{{$user->status == 1 ? 'Aktif' : 'Pasif'}}</span>
                         </li>
@@ -54,14 +95,11 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action " aria-current="true">
+                        <a href="/participant/edit/{{$user->id}}" class="list-group-item list-group-item-action " aria-current="true">
                           Düzenle
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            Şifre Değiştir
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            Logo Değiştir
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#UploadModal" class="list-group-item list-group-item-action" aria-current="true">
+                            Fotoğraf Değiştir
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
                             Belge yükle
@@ -288,18 +326,18 @@
     </div>
 
 
-    <div class="modal fade" id="logoUploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="UploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Logo Yükle</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Fotoğraf Yükle</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="address" class="form-label">Bilgisayardan Seç</label>
                     <input type="file" id="file" class="form-control" onchange="upload()">
-                    <input type="hidden" id="logo">
+                    <input type="hidden" id="image">
                 </div>
             </div>
             <div class="modal-footer">
@@ -326,14 +364,14 @@
             .then(function (res) {
                 toastr[res.data.type](res.data.message)
                 if(res.data.status){
-                    $("#logo").val(res.data.url);
+                    $("#image").val(res.data.url);
                 }
             });
     }
 
     function saveLogo(id){
-        var logo = $("#logo").val();
-        axios.post('/user/save-logo', {'logo': logo, 'id': id})
+        var image = $("#image").val();
+        axios.post('/participant/save-image', {'image': image, 'id': id})
             .then(res => {
                 toastr[res.data.type](res.data.message);
                if(res.data.status){

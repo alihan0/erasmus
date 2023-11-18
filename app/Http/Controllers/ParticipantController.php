@@ -127,4 +127,18 @@ class ParticipantController extends Controller
             return response()->json(["type" => "error", "message" => "Katılımcı güncellendi"]);
         }
     }
+
+    public function detail($id){
+        return view('participant.detail', ['user' => User::find($id)]);
+    }
+
+    public function save_image(Request $request){
+        $user = User::find($request->id);
+        $user->image = $request->image;
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Fotoğraf kaydedildi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Fotoğraf kaydedilemedi"]);
+        }
+    }
 }
