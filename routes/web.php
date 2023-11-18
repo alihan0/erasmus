@@ -55,6 +55,7 @@ Route::controller(ParticipantController::class)->middleware('auth')->prefix('par
     Route::post('/remove', 'remove');
     Route::post('/save-image', 'save_image');
     Route::post('/add/emergency-contact', 'add_emergency_contact');
+    Route::post('/add/disease', 'add_disease');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

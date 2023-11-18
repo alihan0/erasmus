@@ -105,7 +105,7 @@
                         <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#emergencyContactModal" class="list-group-item list-group-item-action" aria-current="true">
                             Acil Durum Kişisi Ekle
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#diseaseModal" class="list-group-item list-group-item-action" aria-current="true">
                             Hastalık Ekle
                         </a>
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
@@ -285,7 +285,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Acil Durum Kişileri</h4>
-                            
                             <table class="table">
                                 <thead>
                                   <tr>
@@ -309,6 +308,51 @@
                                             </td>
                                             <td>
                                                 {{$item->phone}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Hastalık Bilgileri</h4>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Hastalık Adı</th>
+                                    <th scope="col">Talimatlar</th>
+                                    <th scope="col">İlaçlar</th>
+                                    <th scope="col">Ölüm Riski</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->Diseases as $item)
+                                        <tr>
+                                            <td>
+                                                {{$item->id}}
+                                            </td>
+                                            <td>
+                                                {{$item->disease}}
+                                            </td>
+                                            <td>
+                                                {{$item->intructions}}
+                                            </td>
+                                            <td>
+                                                {{$item->drugs}}
+                                            </td>
+                                            <td>
+                                                @if ($item->is_fatal == 1)
+                                                    <span class="badge bg-danger">VAR</span>
+                                                @else
+                                                    <span class="badge bg-primary">Yok</span>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -426,6 +470,51 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Hastalık Ekle</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="mb-3">
+                    <label for="disease" class="form-label">Hastalık Adı</label>
+                    <input type="text" class="form-control" id="disease">
+                </div>
+                <div class="mb-3">
+                    <label for="intructions" class="form-label">Talimatlar</label>
+                    <textarea class="form-control" id="intructions" rows="5"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="drugs" class="form-label">İlaçlar</label>
+                            <input type="text" class="form-control" id="drugs">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="emergency_name" class="form-label">Bu hastalık ölümcül mü?</label>
+                            <select name="is_fatal" id="is_fatal" class="form-control">
+                                <option value="0">Hayır</option>
+                                <option value="1">Evet</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+              <button type="button" class="btn btn-primary" onclick="saveDisease({{$user->id}})">Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
 @endsection
 
 @section('script')
@@ -470,6 +559,28 @@
             'proximity': proximity,
             'name': name,
             'phone': phone,
+            'id': id
+        }).then((res) => {
+            toastr[res.data.type](res.data.message);
+            if(res.data.status){
+                setInterval(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        });
+    }
+
+    function saveDisease(id){
+        var disease = $("#disease").val();
+        var intructions = $("#intructions").val();
+        var drugs = $("#drugs").val();
+        var is_fatal = $("#is_fatal").val();
+
+        axios.post('/participant/add/disease', {
+            'disease': disease,
+            'intructions': intructions,
+            'drugs': drugs,
+            'is_fatal': is_fatal,
             'id': id
         }).then((res) => {
             toastr[res.data.type](res.data.message);

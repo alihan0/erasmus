@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Proximity;
+use App\Models\Disease;
 
 class ParticipantController extends Controller
 {
@@ -162,6 +163,36 @@ class ParticipantController extends Controller
             return response()->json(["type" => "success", "message" => "Acil durum kişisi eklendi", 'status' => true]);
         }else{
             return response()->json(["type" => "error", "message" => "Acil durum kişisi eklenemedi"]);
+        }
+    }
+
+    public function add_disease(Request $request){
+        if(!User::find($request->id)){
+            return response()->json(["type" => "warning", "message" => "Katılımcı bulunamadı"]);
+        }
+
+        if(empty($request->disease)){
+            return response()->json(["type" => "warning", "message" => "Bir hastalık adı girmelisiniz"]);
+        }
+
+        if(empty($request->intructions)){
+            return response()->json(["type" => "warning", "message" => "Hastalık talimatları girmelisiniz"]);
+        }
+
+        if(empty($request->drugs)){
+            return response()->json(["type" => "warning", "message" => "Hastalık ilacı girmelisiniz"]);
+        }
+
+        $disease = new Disease;
+        $disease->user = $request->id;
+        $disease->disease = $request->disease;
+        $disease->intructions = $request->intructions;
+        $disease->drugs = $request->drugs;
+        $disease->is_fatal = $request->is_fatal;
+        if($disease->save()){
+            return response()->json(["type" => "success", "message" => "Hastalık eklendi", 'status' => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Hastalık eklenemedi"]);
         }
     }
 }

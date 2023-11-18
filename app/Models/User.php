@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function EmergencyContact(){
         return $this->hasMany(EmergencyContact::class, 'user', 'id');
     }
+
+    public function Diseases(){
+        return $this->hasMany(Disease::class, 'user', 'id');
+    }
 }

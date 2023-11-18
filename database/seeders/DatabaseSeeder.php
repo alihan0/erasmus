@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Disease;
 use App\Models\EmergencyContact;
 use App\Models\ParticipantType;
 use App\Models\Proximity;
@@ -58,6 +59,21 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'proximity' => 1,
             'phone' => 5464971229
+        ]);
+
+        Disease::create([
+            "user" => 2,
+            "disease" => "Hastalık 1",
+            "intructions" => "Lorem ipsum dolor sit a ment.",
+            "drugs" => "ilaç1, ilaç2",
+            "is_fatal" => 0
+        ]);
+        Disease::create([
+            "user" => 2,
+            "disease" => "Hastalık 2",
+            "intructions" => "Lorem ipsum dolor sit a ment.",
+            "drugs" => "ilaç3, ilaç4",
+            "is_fatal" => 1
         ]);
 
         System::create([
