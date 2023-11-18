@@ -67,6 +67,13 @@ class ParticipantController extends Controller
         }else{
             return response()->json(["type" => "error", "message" => "Katılımcı eklenemedi"]);
         }
-
+    }
+    public function remove(Request $request){
+        $user = User::find($request->id);
+        if($user->delete()){
+            return response()->json(["type" => "success", "message" => "Katılımcı silindi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Katılımcı silinemedi"]);
+        }
     }
 }
