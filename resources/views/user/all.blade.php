@@ -90,24 +90,24 @@
     <script>
         function changePassword(id){
             var password = $('#newPassword'+id).val();
-            axios.post('/staff/change-password', {'password': password, 'id': id})
+            axios.post('/user/change-password', {'password': password, 'id': id})
                 .then(res => {
                     toastr[res.data.type](res.data.message);
                    if(res.data.status){
                     setInterval(() => {
-                        window.location.assign('/staff');
+                        window.location.assign('/user');
                     }, 500);
                    } 
                 });
         }
 
         function removeStaff(id){
-            axios.post('/staff/remove', {'id': id})
+            axios.post('/user/remove', {'id': id})
                 .then(res => {
                     toastr[res.data.type](res.data.message);
                    if(res.data.status){
                     setInterval(() => {
-                        window.location.assign('/staff');
+                        window.location.assign('/user');
                     }, 500);
                    } 
                 });
