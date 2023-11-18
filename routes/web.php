@@ -23,7 +23,9 @@ Route::controller(MainController::class)->middleware('auth')->group(function(){
 Route::controller(StaffController::class)->middleware('auth')->prefix('staff')->group(function(){
     Route::get('/', 'all');
     Route::get('/new', 'new');
+    Route::get('/edit/{id}', 'edit');
     Route::post('/create', 'create');
+    Route::post('/update', 'update');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){

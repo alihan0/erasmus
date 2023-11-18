@@ -42,4 +42,29 @@ class StaffController extends Controller
             return response()->json(["type" => "error", "message" => "Personel eklenemedi"]);
         }
     }
+
+    public function edit($id){
+        return view('staff.edit', ['staff' => User::find($id)]);
+    }
+
+    public function update(Request $request){
+        if(empty($request->name) || empty($request->email) || empty($request->phone)){
+            return response()->json(["type" => "warning", "message" => "Tüm alanları doldurun!"]);
+        }
+
+        if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(["type" => "warning", "message" => "Geçerli bir e-posta adresi girin!"]);
+        }
+
+
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        if($user->save()){
+            return response()->json(["type" => "success", "message" => "Personel güncellendi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Personel güncellenemedi"]);
+        }
+    }
 }
