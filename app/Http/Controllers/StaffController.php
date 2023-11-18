@@ -80,4 +80,13 @@ class StaffController extends Controller
             return response()->json(["type" => "error", "message" => "Sifre değiştirilemedi"]);
         }
     }
+
+    public function remove(Request $request){
+        $user = User::find($request->id);
+        if($user->delete()){
+            return response()->json(["type" => "success", "message" => "Personel silindi","status" => true]);
+        }else{
+            return response()->json(["type" => "error", "message" => "Personel silinemedi"]);
+        }
+    }
 }

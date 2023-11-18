@@ -91,5 +91,17 @@
                    } 
                 });
         }
+
+        function removeStaff(id){
+            axios.post('/staff/remove', {'id': id})
+                .then(res => {
+                    toastr[res.data.type](res.data.message);
+                   if(res.data.status){
+                    setInterval(() => {
+                        window.location.assign('/staff');
+                    }, 500);
+                   } 
+                });
+        }
     </script>
 @endsection

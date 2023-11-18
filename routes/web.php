@@ -27,6 +27,7 @@ Route::controller(StaffController::class)->middleware('auth')->prefix('staff')->
     Route::post('/create', 'create');
     Route::post('/update', 'update');
     Route::post('/change-password', 'change_password');
+    Route::post('/remove', 'remove');
 });
 
 Route::controller(AuthController::class)->prefix('auth')->group(function(){
